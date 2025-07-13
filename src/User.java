@@ -1,13 +1,13 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class User {
+public class User  {
     private int id;
     private String email;
     private String username;
     private String password;
     private String role;
-    private String registerTime;
+    private final String registerTime;
 
 
 
@@ -25,6 +25,16 @@ public class User {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd:MM:yyyy");
         registerTime = now.format(formatter);
     }
+
+    public User(int id, String email, String username, String password, String role, String registerTime) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.registerTime = registerTime;
+    }
+
     public void setId(int id){
         this.id = id;
     }
@@ -47,13 +57,15 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if(verifyEmail(email))
-        this.email = email;
+        if(verifyEmail(email)) {
+            this.email = email;
+        }
     }
 
     public void setPassword(String password) {
-        if (verifyPassword(password))
-        this.password = password;
+        if (verifyPassword(password)) {
+            this.password = password;
+        }
     }
 
     public int getId() {
