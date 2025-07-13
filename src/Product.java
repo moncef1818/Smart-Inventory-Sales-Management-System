@@ -6,6 +6,22 @@ public class Product {
     private int stock;
     private double price;
 
+    Product(String productName,String category,int id,String description,int stock,double price){
+        setProductID(id);
+        setCategory(category);
+        setDescription(description);
+        setPrice(price);
+        setStock(stock);
+        setProductName(productName);
+    }
+    Product(String productName,String category,String description,int stock,double price){
+        setCategory(category);
+        setDescription(description);
+        setPrice(price);
+        setStock(stock);
+        setProductName(productName);
+    }
+
     public void setProductName(String productName) {
         this.productName = productName;
     }
