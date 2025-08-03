@@ -127,6 +127,77 @@ public class ProductDAO {
         return products;
     }
 
+
+    public static boolean updateStock(int productID,int newStock){
+        String sql = "UPDATE products SET stock = ? WHERE id = ? ";
+
+        try (Connection conn = DBConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1,newStock);
+            preparedStatement.setInt(2,productID);
+
+            int  rows = preparedStatement.executeUpdate();
+            return rows > 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean deleteProductByID(int productID){
+        String sql = "DELETE FROM products WHERE id = ? ";
+
+        try (Connection conn = DBConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1,productID);
+
+            int  rows = preparedStatement.executeUpdate();
+            return rows > 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean updateProduct(Product product){
+        String sql = "UPDATE products SET name = ? , category = ? , price = ? , description = ? , stock = ? WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1,product.getProductName());
+            preparedStatement.setString(2,product.getCategory());
+            preparedStatement.setDouble(3,product.getPrice());
+            preparedStatement.setString(4, product.getDescription());
+            preparedStatement.setInt(5,product.getStock());
+            preparedStatement.setInt(6,product.getProductID());
+
+            int rows = preparedStatement.executeUpdate();
+
+            return rows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static ArrayList<Product> sortProductsByPrice(boolean ascending){
+        ArrayList<Product> products =  new ArrayList<>();
+        String sql = "SELECT * FROM products ORDER BY price " + ((ascending)? "ASC" : "DESC");
+
+        try (Connection conn = DBConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                products.add(buildProduct(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return products;
+    }
+
     private static Product buildProduct(ResultSet rs) throws SQLException {
         return new Product(
                 rs.getString("name"),

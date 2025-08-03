@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Order {
 
-    ArrayList<Order.OrderedProduct> orderedProducts = new ArrayList<>();
-    double totalPrice=0;
-    String orderTime;
-    int orderID;
-    int userID;
+    private ArrayList<Order.OrderedProduct> orderedProducts = new ArrayList<>();
+    private double totalPrice=0;
+    private String orderTime;
+    private int orderID;
+    private int userID;
 
     Order(int  orderID,int userID){
         setOrderDate();
@@ -60,6 +60,8 @@ public class Order {
         return orderTime;
     }
 
+    public int getUserID() {return userID;}
+
     public static class OrderedProduct{
         Product product;
         int quantity;
@@ -84,7 +86,6 @@ public class Order {
             return quantity;
         }
     }
-
 
 
 }

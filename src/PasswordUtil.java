@@ -21,4 +21,10 @@ public class PasswordUtil {
             return null;
         }
     }
+
+    public static boolean verifyPassword(String input,String stored){
+        String hashedInput = hashPassword(input);
+        return stored.equals(hashedInput);
+
+    }
 }

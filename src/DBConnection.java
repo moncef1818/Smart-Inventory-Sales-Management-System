@@ -3,9 +3,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String url = "jdbc:mysql://localhost:3306";
+    private static final String url = "jdbc:mysql://localhost:3306/stock_system";
     private static final String username = "root";
-    private static final String password ="************";
+    private static final String password ="***************";
     private static Connection connection = null;
 
     public static Connection getConnection(){

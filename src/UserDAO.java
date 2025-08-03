@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class UserDAO {
@@ -52,11 +53,11 @@ public class UserDAO {
         return null;
     }
 
-    public static boolean emailExisted(String email){
+    public static boolean emailExisted(String email) {
         String sql = "SELECT * FROM users WHERE email = ? ";
-        try (Connection conn = DBConnection.getConnection()){
+        try (Connection conn = DBConnection.getConnection()) {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1,email);
+            preparedStatement.setString(1, email);
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {

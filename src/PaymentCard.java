@@ -1,35 +1,66 @@
 public class PaymentCard {
+    private int id;
+    private int userId;
     private String cardHolder;
-    private String cardId;
-    private String password;
+    private String cardNumber;
+    private String hashedPassword;
     private String expireDate;
 
-    PaymentCard(String cardHolder,String cardId,String password,String expireDate){
+    public PaymentCard(String cardHolder, String cardNumber, String plainPassword, String expireDate, int userId) {
         setCardHolder(cardHolder);
-        setCardId(cardId);
+        setCardNumber(cardNumber);
         setExpireDate(expireDate);
-        setPassword(password);
+        setHashedPassword(PasswordUtil.hashPassword(plainPassword));
+        setUserId(userId);
     }
 
-    public void setCardId(String cardId) {
-        if(cardId.length() == 16) this.cardId =cardId;
-        else System.out.println("Card Id should be 16 digit long");
+    public PaymentCard(String cardHolder, String cardNumber, String hashedPassword, String expireDate, int userId, int cardID ) {
+        setCardHolder(cardHolder);
+        setCardNumber(cardNumber);
+        setExpireDate(expireDate);
+        setHashedPassword(hashedPassword);
+        setUserId(userId);
+        setId(cardID);
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        if (cardNumber.length() == 16 && cardNumber.matches("\\d+")) {
+            this.cardNumber = cardNumber;
+        } else {
+            throw new IllegalArgumentException("Card number must be exactly 16 digits.");
+        }
     }
 
     public void setCardHolder(String cardHolder) {
-        this.cardHolder = (cardHolder.isEmpty())? "Guest" : cardHolder;
+        this.cardHolder = (cardHolder == null || cardHolder.isEmpty()) ? "Guest" : cardHolder;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
 
-    public String getCardId() {
-        return cardId;
+    public int getId() {
+        return id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
     }
 
     public String getCardHolder() {
@@ -40,7 +71,7 @@ public class PaymentCard {
         return expireDate;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 }
