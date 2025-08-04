@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.LoginController"
+            prefWidth="400" prefHeight="300">
+    <VBox spacing="15.0" alignment="CENTER" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <Label text="Login" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <TextField fx:id="emailField" promptText="Email" />
+        <PasswordField fx:id="passwordField" promptText="Password" />
+
+        <Button text="Login" onAction="#handleLogin" />
+        <Hyperlink text="Don't have an account? Register" onAction="#goToRegister" />
+    </VBox>
+</AnchorPane>

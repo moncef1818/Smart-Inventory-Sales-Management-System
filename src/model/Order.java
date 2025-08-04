@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,14 +12,14 @@ public class Order {
     private int orderID;
     private int userID;
 
-    Order(int  orderID,int userID){
+    public Order(int  orderID,int userID){
         setOrderDate();
         setOrderID(orderID);
         setUserID(userID);
         updateTotalPrice();
     }
 
-    public void addOrderedProduct(Product product,int quantity){
+    public void addOrderedProduct(Product product, int quantity){
         orderedProducts.add(new OrderedProduct(product,quantity));
         updateTotalPrice();
 
@@ -66,7 +68,7 @@ public class Order {
         Product product;
         int quantity;
 
-        OrderedProduct(Product product,int quantity){
+        OrderedProduct(Product product, int quantity){
             setProduct(product);
             setQuantity(quantity);
         }

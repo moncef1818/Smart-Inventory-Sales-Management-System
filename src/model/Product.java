@@ -1,3 +1,5 @@
+package model;
+
 public class Product {
     private String productName;
     private String category;
@@ -6,7 +8,7 @@ public class Product {
     private int stock;
     private double price;
 
-    Product(String productName,String category,int id,String description,int stock,double price){
+    public Product(String productName,String category,int id,String description,int stock,double price){
         setProductID(id);
         setCategory(category);
         setDescription(description);
@@ -14,7 +16,7 @@ public class Product {
         setStock(stock);
         setProductName(productName);
     }
-    Product(String productName,String category,String description,int stock,double price){
+    public Product(String productName,String category,String description,int stock,double price){
         setCategory(category);
         setDescription(description);
         setPrice(price);

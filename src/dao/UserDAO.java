@@ -1,6 +1,10 @@
+package dao;
+
+import model.User;
+import utils.DBConnection;
+import utils.PasswordUtil;
+
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Optional;
 
 public class UserDAO {
     public static boolean registerUser(User user){
@@ -27,7 +31,6 @@ public class UserDAO {
 
     public static User login(String email,String password){
         String hashedPassword = PasswordUtil.hashPassword(password);
-
         String sql = "SELECT * FROM users WHERE email = ? AND password = ? ";
         try (Connection conn = DBConnection.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(sql);

@@ -1,3 +1,7 @@
+package model;
+
+import utils.PasswordUtil;
+
 public class PaymentCard {
     private int id;
     private int userId;

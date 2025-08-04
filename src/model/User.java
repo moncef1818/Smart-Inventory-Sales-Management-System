@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,7 +15,7 @@ public class User  {
 
 
 
-    User(String email,String username,String password,int role){
+    public User(String email,String username,String password,int role){
         setUsername(username);
         setEmail(email);
         setPassword(password);
@@ -49,7 +51,7 @@ public class User  {
         return (password.length() >= 8) ;
     }
     private void setRole(int role){
-        this.role = (role==0)? "Admin" : "Costumer";
+        this.role = (role==0)? "Admin" : "Customer";
     }
 
     public void setUsername(String username) {
@@ -57,16 +59,20 @@ public class User  {
     }
 
     public void setEmail(String email) {
-        if(verifyEmail(email)) {
-            this.email = email;
+        if (!verifyEmail(email)) {
+            throw new IllegalArgumentException("Invalid email format.");
         }
+        this.email = email;
     }
 
+
     public void setPassword(String password) {
-        if (verifyPassword(password)) {
-            this.password = password;
+        if (!verifyPassword(password)) {
+            throw new IllegalArgumentException("Password must be at least 8 characters.");
         }
+        this.password = password;
     }
+
 
     public int getId() {
         return id;
